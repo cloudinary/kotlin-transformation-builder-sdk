@@ -1,4 +1,4 @@
-Cloudinary Kotlin SDK
+Cloudinary Kotlin Transformation Builder SDK
 =========================
 [![Build Status](https://api.travis-ci.com/cloudinary/cloudinary_kotlin.svg?branch=master)](https://app.travis-ci.com/github/cloudinary/cloudinary_kotlin)
 ## About
