@@ -2,7 +2,7 @@ Cloudinary Kotlin Transformation Builder SDK
 =========================
 [![Build Status](https://api.travis-ci.com/cloudinary/cloudinary_kotlin.svg?branch=master)](https://app.travis-ci.com/github/cloudinary/cloudinary_kotlin)
 ## About
-The Cloudinary Kotlin Transformation Builder SDK is an internal package if you want the full Cloudinary experience go [here](https://github.com/cloudinary/cloudinary_kotlin).
+This is an internal Cloudinary SDK. The Cloudinary Kotlin-Transformation-Builder-SDK allows you to generate transformations for [Cloudinary_Kotlin](https://github.com/cloudinary/cloudinary_kotlin).
 
 ### Additional documentation
 This Readme provides basic installation and usage information.
@@ -13,7 +13,6 @@ For the complete documentation, see the [Kotlin SDK Guide](https://cloudinary.co
 - [Version Support](#Version-Support)
 - [Installation](#installation)
 - [Usage](#usage)
-    - [Setup](#Setup)
     - [Transform and Optimize Assets](#Transform-and-Optimize-Assets)
 
 ## Key Features
@@ -48,26 +47,10 @@ Add the Cloudinary Kotlin SDK to the list of dependencies in your `pom.xml` file
 ```
 
 ## Usage
-### Setup
-The `Cloudinary` class is the main entry point for using the library. Your `cloud_name` is required to create an instance of this class. Your `api_key` and `api_secret` are also needed to perform secure API calls to Cloudinary (e.g., image and video uploads). Setting the configuration parameters can be done either programmatically using an appropriate constructor of the Cloudinary class or globally using an environment variable. You can find your account-specific configuration parameters in the **Dashboard** page of your [account console](https://cloudinary.com/console).
-
-Here's an example of setting configuration parameters in your Kotlin application:
-
-```kotlin
-import com.cloudinary.*
-
-...
-private val cloudinary = Cloudinary("cloudinary://<your-api-key>:<your-api-secret>@<your-cloud-name>")
-```
 ### Transform and Optimize Assets
 
-Generate a Cloudinary URL using the `cloudinary.media` helper method and pass this to your image or video view:
-
-For example, to generate a url for an image called `sample` on the `demo` account, and resize it using the fill method:
-
-A transformation is also added to the image - cropping and using the sepia effect:
-
 ```kotlin
+// Create your transformation
 val transformation = resize(Resize.fill {
   width(100)
   height(150)
