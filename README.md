@@ -2,8 +2,7 @@ Cloudinary Kotlin SDK
 =========================
 [![Build Status](https://api.travis-ci.com/cloudinary/cloudinary_kotlin.svg?branch=master)](https://app.travis-ci.com/github/cloudinary/cloudinary_kotlin)
 ## About
-The Cloudinary iOS SDK allows you to quickly and easily integrate your application with Cloudinary.
-Effortlessly optimize and transform your cloud's assets.
+The Cloudinary Kotlin Transformation Builder SDK is an internal package if you want the full Cloudinary experience go [here](https://github.com/cloudinary/cloudinary_kotlin).
 
 ### Additional documentation
 This Readme provides basic installation and usage information.
@@ -33,7 +32,7 @@ Add the SDK to your project as a dependency, we recommend using a build manageme
 Add the Cloudinary Kotlin SDK to the dependencies section of your `build.gradle` file.
 
 ```
-implementation 'com.cloudinary:kotlin-url-gen:1.0.0'
+implementation 'com.cloudinary:kotlin-transformation-builder-sdk:1.0.0'
 ```
 
 **Using Maven**:
@@ -42,7 +41,7 @@ Add the Cloudinary Kotlin SDK to the list of dependencies in your `pom.xml` file
 ```xml
 <dependency>
   <groupId>com.cloudinary</groupId>
-  <artifactId>kotlin-url-gen</artifactId>
+  <artifactId>kotlin-transformation-builder-sdk</artifactId>
   <version>1.0.0</version>
   <type>pom</type>
 </dependency>
@@ -69,19 +68,14 @@ For example, to generate a url for an image called `sample` on the `demo` accoun
 A transformation is also added to the image - cropping and using the sepia effect:
 
 ```kotlin
- val cloudinary = Cloudinary("cloudinary://@demo")
- val url = cloudinary.image {
-   publicId("sample")
-   resize(Resize.fill {
-     width(100)
-     height(150)
-   })
- }
- println(url.generate())
+val transformation = resize(Resize.fill {
+  width(100)
+  height(150)
+})
 ```
 
-This will output the following url:
-`https://res.cloudinary.com/demo/image/upload/c_fill,h_150,w_100/sample.jpg`
+This will output the following:
+`c_fill,h_150,w_100`
 
 ## Contributions
 See [contributing guidelines](/CONTRIBUTING.md).
