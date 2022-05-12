@@ -4,6 +4,6 @@ pluginManagement {
         mavenCentral()
     }
 }
-rootProject.name = 'cloudinary_kotlin_transformation_builder_sdk'
+rootProject.name = 'kotlin-transformation-builder-sdk'
 include 'transformation-builder'
 include ':docs'

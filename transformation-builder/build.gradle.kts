@@ -1,4 +1,4 @@
-val publicationName = "kotlin-transformation-builder"
+val publicationName = "kotlin-transformation-builder-sdk"
 
 plugins {
     id("cloudinary_lib")
