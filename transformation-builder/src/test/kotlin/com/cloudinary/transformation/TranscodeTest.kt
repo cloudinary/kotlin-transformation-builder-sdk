@@ -14,6 +14,7 @@ class TranscodeTest {
     @Test
     fun testAudioFrequency() {
         cldAssert("af_8000", Transcode.audioFrequency(AudioFrequency.freq8000()))
+        cldAssert("af_iaf", Transcode.audioFrequency(AudioFrequency.original()))
     }
 
     @Test
@@ -47,6 +48,14 @@ class TranscodeTest {
             profile(VideoCodecProfile.high())
             level(VideoCodecLevel.vcl31())
         }))
+
+        cldAssert("vc_h265", videoCodec(VideoCodec.h265()))
+    }
+
+    @Test
+    fun testDisableBFrames() {
+        cldAssert("vc_h265:auto:auto:bframes_no", videoCodec(VideoCodec.h265 { bFrames(false) }))
+        cldAssert("vc_h265", videoCodec(VideoCodec.h265 { bFrames(true) }))
     }
 
     @Test
