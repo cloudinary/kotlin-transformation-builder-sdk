@@ -2,6 +2,7 @@ package com.cloudinary.transformation
 
 import com.cloudinary.cldAssert
 import com.cloudinary.transformation.background.Background
+import com.cloudinary.transformation.expression.Expression
 import com.cloudinary.transformation.gravity.Gravity
 import com.cloudinary.transformation.resize.AspectRatio
 import com.cloudinary.transformation.resize.Resize
@@ -52,6 +53,24 @@ class ResizeTest {
         cldAssert("c_scale,g_liquid,w_100", scale {
             width(100)
             liquidRescaling(true)
+        })
+        cldAssert("ar_w_mul_2,c_scale", Resize.scale {
+            aspectRatio(Expression("width * 2"))
+        })
+        cldAssert("c_scale,h_w_mul_2", Resize.scale {
+            height(Expression("width * 2"))
+        })
+        cldAssert("c_scale,w_w_mul_2", Resize.scale {
+            width(Expression("width * 2"))
+        })
+        cldAssert("c_crop,x_w_mul_2", Resize.crop {
+            x(Expression("width * 2"))
+        })
+        cldAssert("c_crop,y_w_mul_2", Resize.crop {
+            y(Expression("width * 2"))
+        })
+        cldAssert("c_crop,z_w_mul_2", Resize.crop {
+            zoom(Expression("width * 2"))
         })
     }
 
@@ -144,6 +163,14 @@ class ResizeTest {
 
     @Test
     fun testFill() {
+        cldAssert("c_fill,g_xy_center,x_100,y_100", Resize.fill {
+            gravity(Gravity.xyCenter())
+            offsetX(100)
+            offsetY(100)})
+        cldAssert("c_fill,g_xy_center,x_100,y_100", Resize.fill {
+            gravity(Gravity.xyCenter())
+            x(100)
+            y(100)})
         cldAssert("c_fill,w_100", Resize.fill { width(100) })
         cldAssert("c_fill,w_1.0", Resize.fill { width(1f) })
         cldAssert("c_fill,h_100,w_100", Resize.fill {
