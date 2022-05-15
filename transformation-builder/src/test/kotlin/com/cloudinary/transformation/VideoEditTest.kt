@@ -23,7 +23,12 @@ class VideoEditTest {
         cldAssert("eo_auto", trim { endOffset("auto") })
         cldAssert("eo_2.63", trim { endOffset(2.63f) })
         cldAssert("eo_35.0p", trim { endOffset("35.0p") })
-
+        cldAssert("so_du_div_3", VideoEdit.trim {
+            startOffset(Expression("duration / 3"))
+        })
+        cldAssert("eo_du_div_3", VideoEdit.trim {
+            endOffset(Expression("duration / 3"))
+        })
         cldAssert("du_2.63", trim { duration(2.63f) })
         cldAssert("du_35.0p", trim { duration("35.0p") })
 
@@ -94,5 +99,17 @@ class VideoEditTest {
         cldAssert("e_volume:50", VideoEdit.volume(Volume.byPercent(50)))
         cldAssert("e_volume:10db", VideoEdit.volume(Volume.byDecibels(10)))
         cldAssert("e_volume:mute", VideoEdit.volume(Volume.mute()))
+    }
+
+    @Test
+    fun testWaveform() {
+        cldAssert("f_jpg,fl_waveform", VideoEdit.waveform(Format.jpg()))
+
+        cldAssert(
+            "b_white,co_black,f_png,fl_waveform", VideoEdit.waveform(Format.png()) {
+                color(Color.BLACK)
+                background(Color.WHITE)
+            }
+        )
     }
 }
