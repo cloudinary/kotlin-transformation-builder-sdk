@@ -2,7 +2,7 @@ package com.cloudinary.transformation.animated
 
 import com.cloudinary.transformation.*
 
-class AnimateEdit(
+class AnimatedEdit(
     private val delay: Int? = null,
     private val loop: Int? = null
 ): Animated() {
@@ -19,6 +19,6 @@ class AnimateEdit(
         fun delay(delay: Int) = apply { this.delay = delay }
         fun loop(loop: Int) = apply { this.loop = loop }
 
-        override fun build() = AnimateEdit(delay, loop)
+        override fun build() = AnimatedEdit(delay, loop)
     }
 }

@@ -6,8 +6,8 @@ import com.cloudinary.transformation.AnimatedComponentBuilder
 
 abstract class Animated: Action {
     companion object {
-        fun edit(options: (AnimateEdit.Builder.() -> Unit)? = null) =
-            buildAnimated(AnimateEdit.Builder(), options)
+        fun edit(options: (AnimatedEdit.Builder.() -> Unit)? = null) =
+            buildAnimated(AnimatedEdit.Builder(), options)
     }
 }
 
