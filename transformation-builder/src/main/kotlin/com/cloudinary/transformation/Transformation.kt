@@ -25,6 +25,11 @@ class Transformation(internal val actions: List<Action> = emptyList()) : ITransf
 }
 
 @TransformationDsl
+interface AnimatedComponentBuilder {
+    fun build(): Action
+}
+
+@TransformationDsl
 interface TransformationComponentBuilder {
     fun build(): Action
 }
