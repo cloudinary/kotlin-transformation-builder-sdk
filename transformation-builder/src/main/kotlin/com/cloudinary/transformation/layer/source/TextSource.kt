@@ -1,9 +1,6 @@
 package com.cloudinary.transformation.layer.source
 
-import com.cloudinary.transformation.Color
-import com.cloudinary.transformation.ITransformableImage
-import com.cloudinary.transformation.ImageTransformation
-import com.cloudinary.transformation.Param
+import com.cloudinary.transformation.*
 import com.cloudinary.transformation.expression.Expression
 
 class TextSource internal constructor(
@@ -11,7 +8,8 @@ class TextSource internal constructor(
     private val style: Any,
     private val backgroundColor: Color? = null,
     private val textColor: Any? = null,
-    override val transformation: ITransformableImage<*>? = null
+    override val transformation: ITransformableImage<*>? = null,
+    private val stroke: Any? = null
 ) : Source {
 
     // CODE SMELL: since the container of this source may need to resort the params, we cannot fully encapsulate
@@ -19,13 +17,14 @@ class TextSource internal constructor(
     override fun extraComponents(): List<Param> {
         return listOfNotNull(
             backgroundColor?.let { Param("b", it) },
-            textColor?.let { Param("co", it) }
+            textColor?.let { Param("co", it) },
+            stroke?.let { Param("bo", it)}
         )
     }
 
     // See comment above - this method does not include the extras!
     override fun toString(): String {
-        return "text:$style:${encodeText(text)}"
+        return "text:$style:${encodeText(text)}".joinWithValues(stroke?.let { "stroke" })
     }
 
     companion object {
@@ -47,6 +46,7 @@ class TextSource internal constructor(
         private var style: Any? = null
         private var backgroundColor: Color? = null
         private var textColor: Any? = null
+        private var stroke: Any? = null
         private var transformation: ITransformableImage<*>? = null
 
         fun style(style: TextStyle) = apply { this.style = style }
@@ -66,6 +66,9 @@ class TextSource internal constructor(
         fun textColor(textColor: Color) = apply { this.textColor = textColor }
         fun textColor(textColor: String) = apply {this.textColor = textColor }
 
+        fun stroke(stroke: String) = apply {this.stroke = stroke}
+        fun stroke(stroke: Stroke) = apply {this.stroke = stroke}
+
         fun transformation(transformation: ITransformableImage<*>) = apply { this.transformation = transformation }
         fun transformation(transformation: ImageTransformation.Builder.() -> Unit) = apply {
             val builder = ImageTransformation.Builder()
@@ -76,7 +79,7 @@ class TextSource internal constructor(
         fun build(): TextSource {
             val safeStyle = style
             require(safeStyle != null) { "A style must be provided (font + font size are mandatory)." }
-            return TextSource(text, safeStyle, backgroundColor, textColor, transformation)
+            return TextSource(text, safeStyle, backgroundColor, textColor, transformation, stroke)
         }
     }
 }
