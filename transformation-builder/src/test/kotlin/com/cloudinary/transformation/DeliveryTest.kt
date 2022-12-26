@@ -41,6 +41,7 @@ class DeliveryTest {
     fun testQuality() {
 
         cldAssert("q_100", Delivery.quality(100))
+        cldAssert("q_auto", quality(Quality.auto()))
         cldAssert("q_100:420", Delivery.quality(100) {
             chromaSubSampling(ChromaSubSampling.chroma420())
         })
@@ -69,10 +70,8 @@ class DeliveryTest {
 
     @Test
     fun testFormat() {
-        cldAssert(
-            "f_png",
-            Delivery.format(Format.png())
-        )
+        cldAssert("f_png", Delivery.format(Format.png()))
+        cldAssert("f_png", format(Format.png()))
 
         cldAssert("f_jpg,fl_progressive:semi",
             Delivery.format(Format.jpg()) {

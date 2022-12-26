@@ -31,5 +31,15 @@ abstract class Delivery : Action {
             options?.let { builder.it() }
             return builder.build()
         }
+        operator fun invoke(auto: Quality): QualityAction {
+            return quality(auto)
+        }
+
+        operator fun invoke(format: Format): DeliveryFormat {
+            return format(format)
+        }
     }
 }
+
+typealias quality = Delivery.Companion
+typealias format = Delivery.Companion
