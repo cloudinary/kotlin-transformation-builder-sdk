@@ -1,5 +1,8 @@
 package com.cloudinary.transformation
 
+import com.cloudinary.transformation.delivery.Delivery
+import com.cloudinary.transformation.delivery.Quality
+
 @TransformationDsl
 class Transformation(internal val actions: List<Action> = emptyList()) : ITransformable<Transformation> {
     constructor(options: Builder.() -> Unit) : this(fromBuilder(options))
@@ -13,6 +16,8 @@ class Transformation(internal val actions: List<Action> = emptyList()) : ITransf
     class Builder(private val components: MutableList<Action> = mutableListOf()) : ITransformable<Builder> {
         override fun add(action: Action) = apply { components.add(action) }
         fun build() = Transformation(components)
+        fun quality(quality: Quality) = apply { components.add(Delivery.quality(quality))}
+        fun format(format: Format) = apply { components.add(Delivery.format(format))}
     }
 
     companion object {

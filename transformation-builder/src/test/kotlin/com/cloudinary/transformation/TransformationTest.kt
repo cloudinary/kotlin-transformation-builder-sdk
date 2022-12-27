@@ -7,6 +7,7 @@ import com.cloudinary.transformation.Transformation.Companion.transformation
 import com.cloudinary.transformation.adjust.Adjust
 import com.cloudinary.transformation.adjust.Adjust.Companion.opacity
 import com.cloudinary.transformation.delivery.Delivery
+import com.cloudinary.transformation.delivery.Quality
 import com.cloudinary.transformation.effect.Effect
 import com.cloudinary.transformation.effect.Effect.Companion.sepia
 import com.cloudinary.transformation.effect.GradientFade
@@ -347,6 +348,16 @@ class TransformationTest {
                         )
                     )
                 })
+        })
+    }
+
+    @Test
+    fun testQualityAlias() {
+        cldAssert("q_auto", transformation {
+            quality(Quality.auto())
+        })
+        cldAssert("f_auto", transformation {
+            format(Format.auto())
         })
     }
 }
