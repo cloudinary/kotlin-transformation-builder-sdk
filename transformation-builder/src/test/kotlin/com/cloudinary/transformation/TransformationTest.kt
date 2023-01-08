@@ -352,7 +352,7 @@ class TransformationTest {
     }
 
     @Test
-    fun testQualityAlias() {
+    fun testAliases() {
         cldAssert("q_auto", transformation {
             quality(Quality.auto())
         })
