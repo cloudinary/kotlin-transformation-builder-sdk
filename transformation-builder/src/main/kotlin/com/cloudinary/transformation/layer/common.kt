@@ -16,9 +16,10 @@ internal fun buildLayerComponent(
     timeline: Timeline? = null,
     extras: Collection<Param> = emptyList()
 ): String {
-    val sourceComponent = (source.extraComponents() + Param(sourceParamKey, source)).toComponentString()
+    var sourceComponent = (source.extraComponents() + Param(sourceParamKey, source)).toComponentString()
 
     // The extra params, alongside position and timeline-position, plus fl_layer_apply - all go in the last component:
+    sourceComponent = sourceComponent.split(",").sortedBy { it}.joinToString(separator = ",")
     val lastComponent = mutableListOf<Param>().apply {
         addAll(extras)
         add(Param("fl", "layer_apply"))

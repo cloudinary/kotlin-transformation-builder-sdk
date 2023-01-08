@@ -13,6 +13,7 @@ class TextSource internal constructor(
     private val backgroundColor: Color? = null,
     private val textColor: Any? = null,
     override val transformation: ITransformableImage<*>? = null,
+    private val textFit: TextFit? = null,
     private val stroke: Any? = null
 ) : Source {
 
@@ -28,7 +29,11 @@ class TextSource internal constructor(
 
     // See comment above - this method does not include the extras!
     override fun toString(): String {
-        return "text:$style:${encodeText(text)}".joinWithValues(stroke?.let { "stroke" })
+        var string = "text:$style:${encodeText(text)}".joinWithValues(stroke?.let { "stroke" })
+        if (textFit != null) {
+            return string.joinWithValues(textFit, separator = ",")
+        }
+        return string
     }
 
     companion object {
@@ -52,6 +57,7 @@ class TextSource internal constructor(
         private var textColor: Any? = null
         private var stroke: Any? = null
         private var transformation: ITransformableImage<*>? = null
+        private var textFit: TextFit? = null
 
         fun style(style: TextStyle) = apply { this.style = style }
         fun style(style: String) = apply { this.style = style }
@@ -80,10 +86,19 @@ class TextSource internal constructor(
             this.transformation = builder.build()
         }
 
+        fun textFit(width: Any? = null, height: Any? = null, options: (TextFit.Builder.() -> Unit)? = null) {
+            var builder = TextFit.Builder(width, height)
+            options?.let { builder.it() }
+            options?.let {
+                builder.it()
+            }
+            this.textFit = builder.build()
+        }
+
         fun build(): TextSource {
             val safeStyle = style
             require(safeStyle != null) { "A style must be provided (font + font size are mandatory)." }
-            return TextSource(text, safeStyle, backgroundColor, textColor, transformation, stroke)
+            return TextSource(text, safeStyle, backgroundColor, textColor, transformation, stroke, textFit)
         }
     }
 }

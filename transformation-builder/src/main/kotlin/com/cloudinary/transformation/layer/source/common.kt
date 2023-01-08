@@ -4,6 +4,7 @@ import com.cloudinary.transformation.BackgroundColor
 import com.cloudinary.transformation.Color
 import com.cloudinary.transformation.IBaseTransformable
 import com.cloudinary.transformation.Param
+import com.cloudinary.transformation.joinWithValues
 import com.cloudinary.util.cldSmartUrlEncode
 import java.awt.Stroke
 import java.beans.Expression
@@ -74,6 +75,29 @@ private fun buildTextStyle(
     val builder = TextStyle.Builder(fontFamily, fontSize)
     options?.let { builder.it() }
     return builder.build()
+}
+
+class Size internal constructor(private val width: Any, private val height: Any? = null) {
+    fun getWidth(): Any {
+        return width
+    }
+    fun getHeight(): Any? {
+        return height
+    }
+}
+
+class TextFit internal constructor(private var width: Any?, private var height: Any? = null) {
+
+    override fun toString(): String {
+        return "c_fit".joinWithValues(width?.let { "w_$it" },height?.let { "h_$it" }, separator =  ",")
+    }
+
+    class Builder(private var width: Any?, private var height: Any?) {
+
+        fun height(height: Any) = apply { this.height = height}
+        fun size(size: Size) = apply { this.width = size.getWidth(); this.height = size.getHeight()}
+        fun build() = TextFit(width,height)
+    }
 }
 
 class TextStyle internal constructor(
