@@ -10,6 +10,7 @@ import com.cloudinary.transformation.layer.position.Position
 import com.cloudinary.transformation.layer.source.Size
 import com.cloudinary.transformation.layer.source.Source.Companion.fetch
 import com.cloudinary.transformation.layer.source.Source.Companion.image
+import com.cloudinary.transformation.layer.source.Stroke
 import com.cloudinary.transformation.resize.Resize.Companion.scale
 import org.junit.Test
 
@@ -97,5 +98,34 @@ class OverlayTest {
             })
 
         cldAssert("\$style_!Arial_17!/\$myColor_!red!/co_\$myColor,l_text:\$style:hello-world/fl_layer_apply", transformation)
+    }
+
+    @Test
+    fun testTextOverlayWithStroke() {
+        var overlay = Overlay.text {
+            source("hello world!") {
+                style("Arial", 17)
+                textColor(Color.RED)
+                backgroundColor(Color.GREEN)
+                stroke(Stroke.solid(2, "white"))
+                transformation { resize(scale { width(250) }) }
+            }
+            position(position)
+        }
+
+        cldAssert("b_green,bo_2px_solid_white,co_red,l_text:Arial_17:hello world!:stroke/c_scale,w_250/fl_layer_apply,g_cat,x_20", overlay)
+
+        overlay = Overlay.text {
+            source("hello world!") {
+                style("Arial", 17)
+                textColor(Color.RED)
+                backgroundColor(Color.GREEN)
+                stroke("2px_solid_white")
+                transformation { resize(scale { width(250) }) }
+            }
+            position(position)
+        }
+
+        cldAssert("b_green,bo_2px_solid_white,co_red,l_text:Arial_17:hello world!:stroke/c_scale,w_250/fl_layer_apply,g_cat,x_20", overlay)
     }
 }

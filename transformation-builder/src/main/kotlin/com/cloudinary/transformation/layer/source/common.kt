@@ -1,9 +1,12 @@
 package com.cloudinary.transformation.layer.source
 
+import com.cloudinary.transformation.BackgroundColor
+import com.cloudinary.transformation.Color
 import com.cloudinary.transformation.IBaseTransformable
 import com.cloudinary.transformation.Param
 import com.cloudinary.transformation.joinWithValues
 import com.cloudinary.util.cldSmartUrlEncode
+import java.awt.Stroke
 import java.beans.Expression
 import java.util.regex.Pattern
 
@@ -306,4 +309,19 @@ private fun encode(text: String): String {
     result.append(text.substring(start).cldSmartUrlEncode())
 
     return result.toString().replace("%2C", "%252C").replace("/", "%252F")
+}
+
+class Stroke(private val width: Any, private val color: Any) {
+
+    companion object {
+        fun solid(width: Any, color: Any) = Stroke(width, color)
+    }
+
+    override fun toString(): String {
+        return listOfNotNull(
+            width?.let {"${it}px"},
+            color?.let {"solid_$it"}
+        ).joinToString("_")
+    }
+
 }
