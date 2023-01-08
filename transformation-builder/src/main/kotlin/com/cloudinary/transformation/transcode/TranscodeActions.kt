@@ -37,6 +37,8 @@ class ToAnimated(
 
         fun sampling(videoSampling: Int) = apply { this.sampling = videoSampling }
         fun sampling(videoSampling: String) = apply { this.sampling = videoSampling }
+
+        @Deprecated("This function will be removed in the next major version, use Animated.edit instead")
         fun delay(delay: Int) = apply { this.delay = delay }
 
         override fun build() = ToAnimated(animatedFormat, sampling, delay)
