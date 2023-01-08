@@ -14,11 +14,13 @@ class StreamingProfileAction internal constructor(private val profile: Any) : Tr
 // TODO no format enum?
 class ToAnimated(
     private val animatedFormat: Any,
-    private val sampling: Any? = null
+    private val sampling: Any? = null,
+    private val delay: Int? = null
 ) : Transcode() {
 
     override fun toString(): String {
         return listOfNotNull(
+            delay?.let { Param("dl", it) },
             Param("f", animatedFormat),
             Param("fl", "animated"),
             if (animatedFormat.toString().toLowerCase(Locale.ROOT) == "webp") Param("fl", "awebp") else null,
@@ -31,11 +33,15 @@ class ToAnimated(
         constructor(animatedFormat: String) : this(animatedFormat as Any)
 
         private var sampling: Any? = null
+        private var delay: Int? = null
 
         fun sampling(videoSampling: Int) = apply { this.sampling = videoSampling }
         fun sampling(videoSampling: String) = apply { this.sampling = videoSampling }
 
-        override fun build() = ToAnimated(animatedFormat, sampling)
+        @Deprecated("This function will be removed in the next major version, use Animated.edit instead")
+        fun delay(delay: Int) = apply { this.delay = delay }
+
+        override fun build() = ToAnimated(animatedFormat, sampling, delay)
     }
 
 
