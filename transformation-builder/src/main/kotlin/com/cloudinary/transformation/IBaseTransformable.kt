@@ -2,6 +2,7 @@ package com.cloudinary.transformation
 
 import com.cloudinary.transformation.adjust.Adjust
 import com.cloudinary.transformation.delivery.Delivery
+import com.cloudinary.transformation.delivery.Quality
 import com.cloudinary.transformation.effect.Effect
 import com.cloudinary.transformation.expression.Conditional
 import com.cloudinary.transformation.expression.Variable
@@ -82,6 +83,10 @@ interface IBaseTransformable<T> {
 
     // delivery
     fun delivery(delivery: Delivery) = add(delivery)
+
+    //aliases for delivery quality and format
+    fun quality(quality: Quality) = add(Delivery.quality(quality))
+    fun format(format: Format) = add(Delivery.format(format))
 
     fun extract(extract: Extract) = add(extract)
 
