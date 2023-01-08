@@ -7,6 +7,7 @@ import com.cloudinary.transformation.gravity.FocusOn
 import com.cloudinary.transformation.gravity.Gravity
 import com.cloudinary.transformation.layer.BlendMode.Companion.multiply
 import com.cloudinary.transformation.layer.position.Position
+import com.cloudinary.transformation.layer.source.Size
 import com.cloudinary.transformation.layer.source.Source.Companion.fetch
 import com.cloudinary.transformation.layer.source.Source.Companion.image
 import com.cloudinary.transformation.resize.Resize.Companion.scale
@@ -40,7 +41,6 @@ class OverlayTest {
             "l_fetch:aHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vZGVtby9pbWFnZS91cGxvYWQvc2FtcGxl/fl_layer_apply,g_cat,x_20",
             overlay
         )
-
         overlay = Overlay.text {
             source("hello world!") {
                 style("Arial", 17)
@@ -52,6 +52,36 @@ class OverlayTest {
         }
 
         cldAssert("b_green,co_red,l_text:Arial_17:hello world!/c_scale,w_250/fl_layer_apply,g_cat,x_20", overlay)
+    }
+
+    @Test
+    fun testTextFit() {
+        var overlay = Overlay.text {
+            source("hello world") {
+                style("Arial", 17)
+                textFit(200)
+            }
+        }
+        cldAssert("c_fit,l_text:Arial_17:hello world,w_200/fl_layer_apply", overlay)
+
+        overlay = Overlay.text {
+            source("hello world") {
+                style("Arial", 17)
+                textFit(200) {
+                    height(100)
+                }
+            }
+        }
+        cldAssert("c_fit,h_100,l_text:Arial_17:hello world,w_200/fl_layer_apply", overlay)
+        overlay = Overlay.text {
+            source("hello world") {
+                style("Arial", 17)
+                textFit {
+                    size(Size(150,300))
+                }
+            }
+        }
+        cldAssert("c_fit,h_300,l_text:Arial_17:hello world,w_150/fl_layer_apply", overlay)
     }
 
     @Test
