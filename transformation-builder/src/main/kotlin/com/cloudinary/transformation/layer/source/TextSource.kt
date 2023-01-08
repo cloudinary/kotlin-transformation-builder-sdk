@@ -1,7 +1,11 @@
 package com.cloudinary.transformation.layer.source
 
-import com.cloudinary.transformation.*
+import com.cloudinary.transformation.Color
+import com.cloudinary.transformation.ITransformableImage
+import com.cloudinary.transformation.Param
 import com.cloudinary.transformation.expression.Expression
+import com.cloudinary.transformation.joinWithValues
+import com.cloudinary.transformation.ImageTransformation
 
 class TextSource internal constructor(
     private val text: Any,
