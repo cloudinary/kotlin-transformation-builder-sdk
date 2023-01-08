@@ -98,7 +98,7 @@ class TextSource internal constructor(
         fun build(): TextSource {
             val safeStyle = style
             require(safeStyle != null) { "A style must be provided (font + font size are mandatory)." }
-            return TextSource(text, safeStyle, backgroundColor, textColor, transformation, stroke, textFit)
+            return TextSource(text, safeStyle, backgroundColor, textColor, transformation, textFit, stroke)
         }
     }
 }
