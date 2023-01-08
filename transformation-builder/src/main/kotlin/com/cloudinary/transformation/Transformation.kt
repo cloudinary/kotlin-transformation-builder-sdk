@@ -1,8 +1,5 @@
 package com.cloudinary.transformation
 
-import com.cloudinary.transformation.delivery.Delivery
-import com.cloudinary.transformation.delivery.Quality
-
 @TransformationDsl
 class Transformation(internal val actions: List<Action> = emptyList()) : ITransformable<Transformation> {
     constructor(options: Builder.() -> Unit) : this(fromBuilder(options))
