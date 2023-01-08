@@ -16,8 +16,6 @@ class Transformation(internal val actions: List<Action> = emptyList()) : ITransf
     class Builder(private val components: MutableList<Action> = mutableListOf()) : ITransformable<Builder> {
         override fun add(action: Action) = apply { components.add(action) }
         fun build() = Transformation(components)
-        fun quality(quality: Quality) = apply { components.add(Delivery.quality(quality))}
-        fun format(format: Format) = apply { components.add(Delivery.format(format))}
     }
 
     companion object {
