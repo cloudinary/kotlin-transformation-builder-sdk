@@ -68,6 +68,32 @@ class Theme internal constructor(private val color: Color, private val photosens
     }
 }
 
+class DropShadow internal constructor(private val azimuth: Int?, private val elevation: Int?, private val spread: Int?) : Effect() {
+    init {
+        azimuth.cldRanged(0, 360)
+        elevation.cldRanged(0, 90)
+        spread.cldRanged(0, 100)
+    }
+
+    override fun toString(): String {
+      return "e_dropshadow".joinWithValues((azimuth?.let { "azimuth_$it" }),(elevation?.let { "elevation_$it" }), (spread?.let { "spread_$it" }), separator = ";")
+    }
+
+    class Builder: EffectBuilder {
+        private var azimuth: Int? = null
+        private var elevation: Int? = null
+        private var spread: Int? = null
+
+        fun azimuth(azimuth: Int) = apply { this.azimuth = azimuth }
+        fun elevation(elevation: Int) = apply { this.elevation = elevation }
+        fun spread(spread: Int) = apply { this.spread = spread }
+
+        override fun build() = DropShadow(azimuth, elevation, spread)
+    }
+
+
+}
+
 class Colorize internal constructor(private val level: Any?, private val color: Color?) : Effect() {
     init {
         level?.cldRanged(0, 100)
@@ -143,7 +169,7 @@ class Pixelate internal constructor(private val squareSize: Any?, private val re
                 region.width?.let { "w_$it" },
                 region.x?.let { "x_$it" },
                 region.y?.let { "y_$it" },
-                separator = ","
+                separator = ",", actionSeparator = ","
             )
             null -> "e_pixelate".joinWithValues(squareSize)
         }
@@ -631,7 +657,7 @@ class Blur internal constructor(private val strength: Any?, private val region: 
                 region.width?.let { "w_$it" },
                 region.x?.let { "x_$it" },
                 region.y?.let { "y_$it" },
-                separator = ","
+                separator = ",", actionSeparator = ","
             )
             null -> "e_blur".joinWithValues(strength)
         }

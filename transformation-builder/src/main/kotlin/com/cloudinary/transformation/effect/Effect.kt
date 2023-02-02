@@ -80,6 +80,12 @@ abstract class Effect : Action {
             }
             return buildEffect(Theme(color).Builder(), options)
         }
+
+        fun dropShadow(options: (DropShadow.Builder.() -> Unit)? = null) : DropShadow {
+            var builder = DropShadow.Builder()
+            options?.let {builder.it() }
+            return builder.build()
+        }
     }
 }
 

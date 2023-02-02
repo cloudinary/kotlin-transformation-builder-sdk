@@ -89,7 +89,7 @@ class Size internal constructor(private val width: Any, private val height: Any?
 class TextFit internal constructor(private var width: Any?, private var height: Any? = null) {
 
     override fun toString(): String {
-        return "c_fit".joinWithValues(width?.let { "w_$it" },height?.let { "h_$it" }, separator =  ",")
+        return "c_fit".joinWithValues(width?.let { "w_$it" },height?.let { "h_$it" }, separator =  ",", actionSeparator = ",")
     }
 
     class Builder(private var width: Any?, private var height: Any?) {

@@ -31,7 +31,7 @@ class TextSource internal constructor(
     override fun toString(): String {
         var string = "text:$style:${encodeText(text)}".joinWithValues(stroke?.let { "stroke" })
         if (textFit != null) {
-            return string.joinWithValues(textFit, separator = ",")
+            return string.joinWithValues(textFit, separator = ",", actionSeparator = ",")
         }
         return string
     }

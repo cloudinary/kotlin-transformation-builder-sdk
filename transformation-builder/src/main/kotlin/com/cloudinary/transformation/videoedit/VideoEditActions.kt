@@ -96,13 +96,13 @@ class Concatenate(
                 "l_$source"
         val lastComponent = "fl_layer_apply" + (prepend?.let { ",so_0" } ?: "")
         val transitionComponent = transition?.let {
-            "e_transition,l_$transition".joinWithValues(transition.transformation, "fl_layer_apply", separator = "/")
+            "e_transition,l_$transition".joinWithValues(transition.transformation, "fl_layer_apply", actionSeparator = DEFAULT_COMPONENT_SEPARATOR)
         }
         return sourceComponent.joinWithValues(
             source.transformation,
             transitionComponent,
             lastComponent,
-            separator = DEFAULT_COMPONENT_SEPARATOR
+            separator = DEFAULT_COMPONENT_SEPARATOR, actionSeparator = DEFAULT_COMPONENT_SEPARATOR
         )
     }
 

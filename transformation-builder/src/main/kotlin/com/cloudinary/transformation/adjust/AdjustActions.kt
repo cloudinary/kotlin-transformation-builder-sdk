@@ -30,7 +30,7 @@ class ViesusCorrect internal constructor(
         val redEyeStr = if (noRedEye == true) "no_redeye" else null
 
         val skinSaturationStr = if (skinSaturation == true) {
-            "skin_saturation".joinWithValues(skinSaturationLevel, separator = "_")
+            "skin_saturation".joinWithValues(skinSaturationLevel, separator = "_", actionSeparator = "_")
         } else {
             null
         }

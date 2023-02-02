@@ -36,5 +36,5 @@ internal fun buildLayerComponent(
         if (blendMode != null) add(Param("e", blendMode))
     }.toComponentString()
 
-    return sourceComponent.joinWithValues(source.transformation, lastComponent, separator = DEFAULT_COMPONENT_SEPARATOR)
+    return sourceComponent.joinWithValues(source.transformation, lastComponent, separator = DEFAULT_COMPONENT_SEPARATOR, actionSeparator = DEFAULT_COMPONENT_SEPARATOR)
 }

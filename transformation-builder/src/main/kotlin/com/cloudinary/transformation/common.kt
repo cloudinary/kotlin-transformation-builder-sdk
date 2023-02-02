@@ -29,12 +29,13 @@ class Param(val key: String, val value: Any) {
  */
 fun Any.joinWithValues(
     vararg values: Any?,
-    separator: String = DEFAULT_VALUES_SEPARATOR
+    separator: String = DEFAULT_VALUES_SEPARATOR,
+    actionSeparator: String = DEFAULT_VALUES_SEPARATOR
 ): String {
     val nonNull = values.filterNotNull()
     if (nonNull.isEmpty()) return this.toString()
 
-    return "$this$separator${nonNull.joinToString(separator = separator)}"
+    return "$this$actionSeparator${nonNull.joinToString(separator = separator)}"
 }
 
 /**
