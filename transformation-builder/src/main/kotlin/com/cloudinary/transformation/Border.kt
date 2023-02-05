@@ -19,7 +19,7 @@ class Border(
     }
 
     override fun toString(): String {
-        return "bo_${width}px_${type}_$color".joinWithValues(roundCorners, separator = ",")
+        return "bo_${width}px_${type}_$color".joinWithValues(roundCorners, separator = ",", actionSeparator = ",")
     }
 
     class Builder(private val width: Any, private val color: Any) : TransformationComponentBuilder {

@@ -53,7 +53,7 @@ class DeliveryFormat(
         val preserveTransparencyStr = if (preserveTransparency == true) "fl_preserve_transparency" else null
         val progressiveStr = progressive?.toString()
         val ignoreMaskChannels = if(ignoreMaskChannels == true) "fl_ignore_mask_channels" else null
-        return "f_$format".joinWithValues(lossyStr, preserveTransparencyStr, progressiveStr, ignoreMaskChannels, separator = ",")
+        return "f_$format".joinWithValues(lossyStr, preserveTransparencyStr, progressiveStr, ignoreMaskChannels, separator = ",", actionSeparator = ",")
     }
 
     class Builder(private val format: Format) : TransformationComponentBuilder {

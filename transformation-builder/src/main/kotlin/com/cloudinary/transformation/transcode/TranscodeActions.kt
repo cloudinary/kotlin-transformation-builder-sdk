@@ -86,7 +86,7 @@ class Fps private constructor(private val fixed: Any?, private val min: Any?, pr
             if (fixed != null)
                 "${this}$fixed"
             else
-                "${this}${min}".joinWithValues(max ?: "", separator = "-")
+                "${this}${min}".joinWithValues(max ?: "", separator = "-", actionSeparator = "-")
         }
     }
 

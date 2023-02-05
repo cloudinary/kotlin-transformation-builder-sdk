@@ -33,7 +33,7 @@ class BorderBackground(private val contrast: Boolean? = null, private val palett
     }
 
     override fun getValues(): String {
-        return "auto:border".joinWithValues(if (contrast == true) "contrast" else null, separator = "_")
+        return "auto:border".joinWithValues(if (contrast == true) "contrast" else null, actionSeparator = "_")
             .joinWithValues(palette?.let { "palette_" + it.joinToString(separator = "_") })
     }
 
@@ -100,7 +100,7 @@ class PredominantBackground(private val contrast: Boolean? = null, private val p
     }
 
     override fun getValues(): String {
-        return "auto:predominant".joinWithValues(if (contrast == true) "contrast" else null, separator = "_")
+        return "auto:predominant".joinWithValues(if (contrast == true) "contrast" else null, actionSeparator = "_")
             .joinWithValues(palette?.let { "palette_" + it.joinToString(separator = "_") })
     }
 

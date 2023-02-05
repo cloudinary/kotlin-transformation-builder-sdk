@@ -70,7 +70,7 @@ class AutoGravityObject internal constructor(
 ) : IAutoGravityObject {
     override fun toString(): String {
         val weightStr = if (avoid == true) "avoid" else (weight?.toString())
-        return "$gravityObject".joinWithValues(weightStr, separator = "_")
+        return "$gravityObject".joinWithValues(weightStr, actionSeparator = "_")
     }
 
     @TransformationDsl
