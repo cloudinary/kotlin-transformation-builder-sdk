@@ -90,8 +90,6 @@ class DropShadow internal constructor(private val azimuth: Int?, private val ele
 
         override fun build() = DropShadow(azimuth, elevation, spread)
     }
-
-
 }
 
 class Colorize internal constructor(private val level: Any?, private val color: Color?) : Effect() {
