@@ -408,6 +408,27 @@ class EffectTest {
     }
 
     @Test
+    fun testBackgroundRemoval() {
+        cldAssert("e_background_removal", Effect.backgroundRemoval())
+        cldAssert("e_background_removal:fineedges_y", Effect.backgroundRemoval {
+            fineEdges(true)
+        })
+        cldAssert("e_background_removal:fineedges_n", Effect.backgroundRemoval {
+            fineEdges(false)
+        })
+        cldAssert("e_background_removal:hints_(cat;dog)", Effect.backgroundRemoval {
+            hints(ForegroundObject.cat(), ForegroundObject.dog())
+        })
+        cldAssert("e_background_removal:hints_(car;bus)", Effect.backgroundRemoval {
+            hints(ForegroundObject.car(), ForegroundObject.bus())
+        })
+        cldAssert("e_background_removal:fineedges_y:hints_(car;bus)", Effect.backgroundRemoval {
+            fineEdges(true)
+            hints(ForegroundObject.car(), ForegroundObject.bus())
+        })
+    }
+
+    @Test
     fun testDropShadow() {
         cldAssert("e_dropshadow", Effect.dropShadow())
         cldAssert("e_dropshadow:elevation_11", Effect.dropShadow {

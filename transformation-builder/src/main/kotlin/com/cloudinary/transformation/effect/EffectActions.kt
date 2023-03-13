@@ -810,6 +810,23 @@ class GradientFade(private val value: String) {
     override fun toString() = value
 }
 
+class BackgroundRemoval(private val fineEdges: Boolean?, private val hints: List<ForegroundObject>? ) : Effect() {
+    override fun toString(): String {
+        return "e_background_removal".joinWithValues(fineEdges?.let { if(fineEdges == true) "fineedges_y" else "fineedges_n" },
+            hints?.let { "hints_(${hints.joinToString(";")})"})
+    }
+
+    class Builder: TransformationComponentBuilder {
+        private var fineEdges: Boolean? = null
+        private var hints: List<ForegroundObject>? = null
+
+        fun fineEdges(fineEdges: Boolean) = apply { this.fineEdges = fineEdges}
+        fun hints(vararg hints: ForegroundObject) = apply { this.hints = hints.toList()}
+
+        override fun build() = BackgroundRemoval(fineEdges, hints)
+    }
+}
+
 abstract class LevelEffectBuilder : EffectBuilder {
     protected var level: Any? = null
 
