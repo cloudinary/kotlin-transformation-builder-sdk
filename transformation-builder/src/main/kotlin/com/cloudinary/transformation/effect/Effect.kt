@@ -86,6 +86,12 @@ abstract class Effect : Action {
             options?.let {builder.it() }
             return builder.build()
         }
+
+        fun backgroundRemoval(options: (BackgroundRemoval.Builder.() -> Unit)? = null): BackgroundRemoval {
+            var builder = BackgroundRemoval.Builder()
+            options?.let { builder.it() }
+            return builder.build()
+        }
     }
 }
 
