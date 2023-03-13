@@ -1,3 +1,11 @@
+1.3.0 / 2023-02-05
+==================
+
+Add Drop Shadow effect
+Add alias for `Format` and `Quality`
+Add `TextFit` action
+Add `Stroke` and `Stroke.solid` actions
+
 1.2.1 / 2022-12-14
 ==================
 
