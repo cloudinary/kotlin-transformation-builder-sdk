@@ -50,6 +50,16 @@ class TransformationTest {
     }
 
     @Test
+    fun testAddTransformationAction() {
+        cldAssert("custom_action/e_sepia/another_custom",
+            transformation {
+                addTransformation("custom_action")
+                effect(sepia())
+                addTransformation(RawAction("another_custom"))
+            })
+    }
+
+    @Test
     fun testCutout() {
         cldAssert("l_sample/e_cut_out,fl_layer_apply", Transformation().cutout(imageSource))
         cldAssert(

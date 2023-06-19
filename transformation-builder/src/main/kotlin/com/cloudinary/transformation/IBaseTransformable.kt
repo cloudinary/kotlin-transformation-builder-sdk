@@ -32,6 +32,17 @@ interface IBaseTransformable<T> {
      */
     fun add(action: String) = add(RawAction(action))
 
+    fun addTransformation(action: Action): T
+
+    /**
+     * Adds (chains) a transformation action.
+     *
+     * @param action The transformation action to add.
+     *
+     * @return A new instance with the added action.
+     */
+    fun addTransformation(action: String) = add(RawAction(action))
+
     private fun <K : TransformationComponentBuilder> addWithBuilder(
         builder: K,
         builderAction: (K.() -> Unit)? = null

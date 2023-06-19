@@ -10,8 +10,11 @@ class Transformation(internal val actions: List<Action> = emptyList()) : ITransf
 
     override fun add(action: Action) = Transformation(actions + action)
 
+    override fun addTransformation(action: Action) = Transformation(actions + action)
+
     class Builder(private val components: MutableList<Action> = mutableListOf()) : ITransformable<Builder> {
         override fun add(action: Action) = apply { components.add(action) }
+        override fun addTransformation(action: Action) = apply { components.add(action) }
         fun build() = Transformation(components)
     }
 
@@ -62,8 +65,11 @@ class ImageTransformation(internal val actions: List<Action> = emptyList()) : IT
 
     override fun add(action: Action) = ImageTransformation(actions + action)
 
+    override fun addTransformation(action: Action) = ImageTransformation(actions + action)
+
     class Builder(private val components: MutableList<Action> = mutableListOf()) : ITransformableImage<Builder> {
         override fun add(action: Action) = apply { components.add(action) }
+        override fun addTransformation(action: Action) = apply { components.add(action) }
         fun build() = ImageTransformation(components)
     }
 }
@@ -78,8 +84,11 @@ class VideoTransformation(internal val actions: List<Action> = emptyList()) : IT
 
     override fun add(action: Action) = VideoTransformation(actions + action)
 
+    override fun addTransformation(action: Action) = VideoTransformation(actions + action)
+
     class Builder(private val components: MutableList<Action> = mutableListOf()) : ITransformableVideo<Builder> {
         override fun add(action: Action) = apply { components.add(action) }
+        override fun addTransformation(action: Action) = apply { components.add(action) }
         fun build() = VideoTransformation(components)
     }
 }
