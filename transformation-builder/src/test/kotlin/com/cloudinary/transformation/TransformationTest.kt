@@ -28,6 +28,7 @@ import com.cloudinary.transformation.layer.source.ImageSource
 import com.cloudinary.transformation.layer.source.Source.Companion.text
 import com.cloudinary.transformation.reshape.Reshape.Companion.distortArc
 import com.cloudinary.transformation.resize.Resize
+import com.cloudinary.transformation.resize.Resize.Companion.crop
 import com.cloudinary.transformation.resize.Resize.Companion.scale
 import com.cloudinary.transformation.transcode.AudioCodec
 import com.cloudinary.transformation.transcode.Transcode
@@ -46,6 +47,18 @@ class TransformationTest {
                 add("custom_action")
                 effect(sepia())
                 add(RawAction("another_custom"))
+            })
+    }
+
+    @Test
+    fun testAddTransformationAction() {
+        cldAssert("custom_action/e_sepia/a_60",
+            transformation {
+                addTransformation("custom_action")
+                effect(sepia())
+                addTransformation(Transformation {
+                    rotate(60)
+                })
             })
     }
 
