@@ -50,6 +50,12 @@ abstract class VideoEdit : Action {
             }
             return buildEffect(Waveform(format).Builder(), options)
         }
+
+        fun progressBar(options: (ProgressBar.Builder.() -> Unit)? = null) : ProgressBar {
+            var builder = ProgressBar.Builder()
+            options?.let { builder.it() }
+            return builder.build()
+        }
     }
 
 }

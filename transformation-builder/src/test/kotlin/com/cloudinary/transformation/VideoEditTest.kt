@@ -4,6 +4,7 @@ import com.cloudinary.cldAssert
 import com.cloudinary.transformation.effect.Effect
 import com.cloudinary.transformation.expression.Expression
 import com.cloudinary.transformation.videoedit.Concatenate
+import com.cloudinary.transformation.videoedit.ProgressBarType
 import com.cloudinary.transformation.videoedit.Transition
 import com.cloudinary.transformation.videoedit.VideoEdit
 import com.cloudinary.transformation.videoedit.VideoEdit.Companion.concatenate
@@ -111,5 +112,24 @@ class VideoEditTest {
                 background(Color.WHITE)
             }
         )
+    }
+
+    @Test
+    fun testProgressBar() {
+        cldAssert("e_progressbar", VideoEdit.progressBar());
+        cldAssert("e_progressbar:type_bar", VideoEdit.progressBar {
+            type(ProgressBarType.BAR)
+        })
+        cldAssert("e_progressbar:color_red", VideoEdit.progressBar {
+            color(Color.RED)
+        })
+        cldAssert("e_progressbar:width_15", VideoEdit.progressBar {
+            width(15)
+        })
+        cldAssert("e_progressbar:type_bar:color_red:width_15", VideoEdit.progressBar {
+            type(ProgressBarType.BAR)
+            color(Color.RED)
+            width(15)
+        });
     }
 }
