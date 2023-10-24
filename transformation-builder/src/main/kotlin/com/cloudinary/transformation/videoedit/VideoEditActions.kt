@@ -163,4 +163,28 @@ class Preview private constructor(
     }
 }
 
+class ProgressBar(private val type: ProgressBarType?, private val color: Color?, private val width: Int?) : VideoEdit() {
+    override fun toString(): String {
+        return "e_progressbar".joinWithValues(type?.let {"type_${type.toString().toLowerCase()}"}, color?.let {"color_$color"}, width?.let {"width_$width"})
+    }
+
+    class Builder: TransformationComponentBuilder {
+        private var type: ProgressBarType? = null;
+        private var color: Color? = null;
+        private var width: Int? = null;
+
+        fun type(type: ProgressBarType) = apply { this.type = type }
+        fun color(color: Color) = apply { this.color = color }
+
+        fun width(width: Int) = apply { this.width = width }
+
+        override fun build() = ProgressBar(type, color, width)
+    }
+}
+
+enum class ProgressBarType(private val value: String) {
+    BAR("bar"),
+    FRAME("frame")
+}
+
 
