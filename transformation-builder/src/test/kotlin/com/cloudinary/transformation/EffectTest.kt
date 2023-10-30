@@ -452,6 +452,30 @@ class EffectTest {
     }
 
     @Test
+    fun testGenerativeReplace() {
+        cldAssert("e_gen_replace:from_baloon;to_airplane", Effect.generativeReplace("baloon", "airplane"))
+        cldAssert("e_gen_replace:from_baloon;to_airplane;preserve-geometry_false", Effect.generativeReplace("baloon", "airplane") {
+            preserve_geometry(false)
+        })
+        cldAssert("e_gen_replace:from_baloon;to_airplane;preserve-geometry_true", Effect.generativeReplace("baloon", "airplane") {
+            preserve_geometry(true)
+        })
+    }
+
+    @Test
+    fun testGenerativeRecolor() {
+        cldAssert("e_gen_recolor:prompt_(sweater;dog;earring);to-color_red", Effect.generativeRecolor(
+            arrayOf("sweater", "dog", "earring"), toColor = Color.RED))
+        cldAssert("e_gen_recolor:prompt_(sweater);to-color_red", Effect.generativeRecolor("sweater", toColor = Color.RED))
+        cldAssert("e_gen_recolor:prompt_(sweater);to-color_red;multiple_true", Effect.generativeRecolor("sweater", toColor = Color.RED) {
+            multiple(true)
+        })
+        cldAssert("e_gen_recolor:prompt_(sweater);to-color_red;multiple_false", Effect.generativeRecolor("sweater", toColor = Color.RED) {
+            multiple(false)
+        })
+    }
+
+    @Test
     fun testGenerativeRemove() {
         cldAssert("e_gen_remove:prompt_(dog)", Effect.generativeRemove{
             prompt("dog")

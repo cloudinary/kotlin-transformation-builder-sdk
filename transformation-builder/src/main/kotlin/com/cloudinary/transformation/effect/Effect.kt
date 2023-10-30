@@ -82,24 +82,30 @@ abstract class Effect : Action {
         }
 
         fun dropShadow(options: (DropShadow.Builder.() -> Unit)? = null) : DropShadow {
-            var builder = DropShadow.Builder()
+            val builder = DropShadow.Builder()
             options?.let {builder.it() }
             return builder.build()
         }
 
         fun backgroundRemoval(options: (BackgroundRemoval.Builder.() -> Unit)? = null): BackgroundRemoval {
-            var builder = BackgroundRemoval.Builder()
+            val builder = BackgroundRemoval.Builder()
+            options?.let { builder.it() }
+            return builder.build()
+        }
+
+        fun generativeReplace(from: String, to: String, options: (GenerativeReplace.Builder.() -> Unit)? = null): GenerativeReplace {
+            val builder = GenerativeReplace.Builder(from, to)
             options?.let { builder.it() }
             return builder.build()
         }
 
         fun generativeRestore(): GenerativeRestore {
-            var builder = GenerativeRestore.Builder()
+            val builder = GenerativeRestore.Builder()
             return builder.build();
         }
 
-        fun generativeRemove(prompt: Any, options: (GenerativeRemove.Builder.() -> Unit)? = null): GenerativeRemove {
-            val builder = GenerativeRemove.Builder()
+        fun generativeRecolor( prompt: Any, toColor: Color, options: (GenerativeRecolor.Builder.() -> Unit)? = null): GenerativeRecolor {
+            val builder = GenerativeRecolor.Builder(prompt, toColor)
             options?.let { builder.it() }
             return builder.build()
         }

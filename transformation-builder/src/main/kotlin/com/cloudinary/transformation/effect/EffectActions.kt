@@ -837,6 +837,40 @@ class GenerativeRestore() : Effect() {
     }
 }
 
+class GenerativeReplace(private val from: String, private val to: String, private val preserveGeometry: Boolean?) : Effect() {
+    override fun toString(): String {
+        return "e_gen_replace".joinWithValues(
+            "from_$from",
+            "to_$to",
+            preserveGeometry?.let { "preserve-geometry_$preserveGeometry" }, separator = ";")
+    }
+
+        class Builder(private val from: String, private val to: String): TransformationComponentBuilder {
+            private var preserveGeometry: Boolean? = null
+
+            fun preserve_geometry(preserve_geometry: Boolean) = apply { this.preserveGeometry = preserve_geometry }
+
+            override fun build() = GenerativeReplace(from, to, preserveGeometry)
+        }
+}
+
+class GenerativeRecolor(private val prompt: Any, private val toColor: Color, private val multiple: Boolean?) : Effect() {
+    override fun toString(): String {
+        return "e_gen_recolor".joinWithValues("prompt_(${ if(prompt is Array<*> && prompt.isArrayOf<String>()) {
+            prompt.toList().joinToString(";")} else {
+            "$prompt"
+        }
+        })", "to-color_$toColor", multiple?.let { "multiple_$multiple" }, separator = ";")
+    }
+    class Builder(val prompt: Any, val toColor: Color): TransformationComponentBuilder {
+        private var multiple: Boolean? = null
+
+        fun multiple(multiple: Boolean?) = apply { this.multiple = multiple }
+
+        override fun build() = GenerativeRecolor(prompt, toColor, multiple)
+    }
+}
+
 class GenerativeRemove(private val prompt: Any?, private val region: Any?, private val multiple: Boolean?) : Effect() {
     override fun toString(): String {
         return "e_gen_remove".joinWithValues(prompt?.let {"prompt_(${ if(prompt is Array<*> && prompt.isArrayOf<String>()) {
