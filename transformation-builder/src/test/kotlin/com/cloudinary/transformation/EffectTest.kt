@@ -447,6 +447,11 @@ class EffectTest {
     }
 
     @Test
+    fun testGenerativeRestore() {
+        cldAssert("e_gen_restore", Effect.generativeRestore())
+    }
+
+    @Test
     fun testGenerativeReplace() {
         cldAssert("e_gen_replace:from_baloon;to_airplane", Effect.generativeReplace("baloon", "airplane"))
         cldAssert("e_gen_replace:from_baloon;to_airplane;preserve-geometry_false", Effect.generativeReplace("baloon", "airplane") {

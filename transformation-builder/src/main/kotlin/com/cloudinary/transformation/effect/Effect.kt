@@ -98,6 +98,11 @@ abstract class Effect : Action {
             options?.let { builder.it() }
             return builder.build()
         }
+
+        fun generativeRestore(): GenerativeRestore {
+            var builder = GenerativeRestore.Builder()
+            return builder.build();
+        }
     }
 }
 
