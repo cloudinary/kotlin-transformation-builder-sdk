@@ -871,10 +871,41 @@ class GenerativeRecolor(private val prompt: Any, private val toColor: Color, pri
     }
 }
 
+class GenerativeRemove(private val prompt: Any?, private val region: Any?, private val multiple: Boolean?) : Effect() {
+    override fun toString(): String {
+        return "e_gen_remove".joinWithValues(prompt?.let {"prompt_(${ if(prompt is Array<*> && prompt.isArrayOf<String>()) {
+            prompt.toList().joinToString(";")} else {
+            "$prompt"
+        }
+        })"}, region?.let { "region_(${ if(region is Array<*> && region.isArrayOf<String>()) {
+            region.toList().joinToString(";")} else {
+            "$region"
+        }})"}, multiple?.let { "multiple_$multiple"}, separator = ";")
+    }
+
+    class Builder: TransformationComponentBuilder {
+        private var prompt: Any? = null
+        private var region: Any? = null
+        private var multiple: Boolean? = null
+
+        fun multiple(multiple: Boolean?) = apply { this.multiple = multiple }
+        fun prompt(prompt: Any) = apply { this.prompt = prompt }
+        fun region(region: Any) = apply { this.region = region }
+
+        override fun build() = GenerativeRemove(prompt, region, multiple)
+    }
+}
+
 abstract class LevelEffectBuilder : EffectBuilder {
     protected var level: Any? = null
 
     fun level(level: Int) = apply { this.level = level }
     fun level(level: Expression) = apply { this.level = level }
     fun level(level: String) = apply { this.level = level }
+}
+
+class Rectangle(private val x: Int, private val y: Int, private val width: Int, private val height: Int) {
+    override fun toString(): String {
+        return "".joinWithValues("x_$x", "y_$y", "w_$width", "h_$height", separator = ";", actionSeparator = "")
+    }
 }

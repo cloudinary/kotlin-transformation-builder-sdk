@@ -109,6 +109,12 @@ abstract class Effect : Action {
             options?.let { builder.it() }
             return builder.build()
         }
+
+        fun generativeRemove(options: (GenerativeRemove.Builder.() -> Unit)? = null): GenerativeRemove {
+            val builder = GenerativeRemove.Builder()
+            options?.let { builder.it() }
+            return builder.build()
+        }
     }
 }
 
