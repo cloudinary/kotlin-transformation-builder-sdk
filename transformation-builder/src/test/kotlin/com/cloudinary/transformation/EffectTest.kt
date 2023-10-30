@@ -445,4 +445,9 @@ class EffectTest {
             azimuth(10)
         })
     }
+
+    @Test
+    fun testGenerativeRestore() {
+        cldAssert("e_gen_restore", Effect.generativeRestore())
+    }
 }
