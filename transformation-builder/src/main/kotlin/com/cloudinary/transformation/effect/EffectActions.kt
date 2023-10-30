@@ -827,6 +827,16 @@ class BackgroundRemoval(private val fineEdges: Boolean?, private val hints: List
     }
 }
 
+class GenerativeRestore() : Effect() {
+    override fun toString(): String {
+        return "e_gen_restore"
+    }
+
+    class Builder: TransformationComponentBuilder {
+        override fun build() = GenerativeRestore();
+    }
+}
+
 abstract class LevelEffectBuilder : EffectBuilder {
     protected var level: Any? = null
 
