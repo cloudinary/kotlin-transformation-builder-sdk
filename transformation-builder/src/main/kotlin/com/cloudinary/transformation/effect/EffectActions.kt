@@ -827,6 +827,23 @@ class BackgroundRemoval(private val fineEdges: Boolean?, private val hints: List
     }
 }
 
+class GenerativeReplace(private val from: String, private val to: String, private val preserveGeometry: Boolean?) : Effect() {
+    override fun toString(): String {
+        return "e_gen_replace".joinWithValues(
+            "from_$from",
+            "to_$to",
+            preserveGeometry?.let { "preserve-geometry_$preserveGeometry" }, separator = ";")
+    }
+
+        class Builder(private val from: String, private val to: String): TransformationComponentBuilder {
+            private var preserveGeometry: Boolean? = null
+
+            fun preserve_geometry(preserve_geometry: Boolean) = apply { this.preserveGeometry = preserve_geometry }
+
+            override fun build() = GenerativeReplace(from, to, preserveGeometry)
+        }
+}
+
 abstract class LevelEffectBuilder : EffectBuilder {
     protected var level: Any? = null
 
