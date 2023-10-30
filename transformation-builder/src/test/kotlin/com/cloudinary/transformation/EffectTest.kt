@@ -450,4 +450,25 @@ class EffectTest {
     fun testGenerativeRestore() {
         cldAssert("e_gen_restore", Effect.generativeRestore())
     }
+
+    @Test
+    fun testGenerativeRemove() {
+        cldAssert("e_gen_remove:prompt_(dog)", Effect.generativeRemove{
+            prompt("dog")
+        })
+        cldAssert("e_gen_remove:prompt_(dog;cat;horse)", Effect.generativeRemove {
+            prompt(arrayOf("dog", "cat", "horse"))
+        })
+        cldAssert("e_gen_remove:prompt_(dog);multiple_true", Effect.generativeRemove{
+            prompt("dog")
+            multiple(true)
+        })
+        cldAssert("e_gen_remove:region_(x_10;y_10;w_10;h_10)", Effect.generativeRemove{
+            region(Rectangle(x = 10, y = 10, width = 10, height = 10))
+        })
+        cldAssert("e_gen_remove:region_(x_10;y_10;w_10;h_10);multiple_false", Effect.generativeRemove{
+            region(Rectangle(x = 10, y = 10, width = 10, height = 10))
+            multiple(false)
+        })
+    }
 }
