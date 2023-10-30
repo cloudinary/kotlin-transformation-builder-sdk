@@ -854,6 +854,23 @@ class GenerativeReplace(private val from: String, private val to: String, privat
         }
 }
 
+class GenerativeRecolor(private val prompt: Any, private val toColor: Color, private val multiple: Boolean?) : Effect() {
+    override fun toString(): String {
+        return "e_gen_recolor".joinWithValues("prompt_(${ if(prompt is Array<*> && prompt.isArrayOf<String>()) {
+            prompt.toList().joinToString(";")} else {
+            "$prompt"
+        }
+        })", "to-color_$toColor", multiple?.let { "multiple_$multiple" }, separator = ";")
+    }
+    class Builder(val prompt: Any, val toColor: Color): TransformationComponentBuilder {
+        private var multiple: Boolean? = null
+
+        fun multiple(multiple: Boolean?) = apply { this.multiple = multiple }
+
+        override fun build() = GenerativeRecolor(prompt, toColor, multiple)
+    }
+}
+
 abstract class LevelEffectBuilder : EffectBuilder {
     protected var level: Any? = null
 

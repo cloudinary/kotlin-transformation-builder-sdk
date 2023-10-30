@@ -100,8 +100,14 @@ abstract class Effect : Action {
         }
 
         fun generativeRestore(): GenerativeRestore {
-            var builder = GenerativeRestore.Builder()
+            val builder = GenerativeRestore.Builder()
             return builder.build();
+        }
+
+        fun generativeRecolor( prompt: Any, toColor: Color, options: (GenerativeRecolor.Builder.() -> Unit)? = null): GenerativeRecolor {
+            val builder = GenerativeRecolor.Builder(prompt, toColor)
+            options?.let { builder.it() }
+            return builder.build()
         }
     }
 }
