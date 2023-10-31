@@ -1,10 +1,25 @@
+1.4.0 / 2023-10-31
+==================
+
+New functionality and features
+------------------------------
+* Add background removal effect
+* Add progress bar effect
+* Add generative restore effect
+* Add generative replace effect
+* Add generative recolor effect
+* Add generative remove effect
+* Add `addTransformation` support
+
 1.3.0 / 2023-02-05
 ==================
 
-Add Drop Shadow effect
-Add alias for `Format` and `Quality`
-Add `TextFit` action
-Add `Stroke` and `Stroke.solid` actions
+New functionality and features
+------------------------------
+* Add Drop Shadow effect
+* Add alias for `Format` and `Quality`
+* Add `TextFit` action
+* Add `Stroke` and `Stroke.solid` actions
 
 1.2.1 / 2022-12-14
 ==================
