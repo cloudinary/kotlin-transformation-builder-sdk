@@ -837,20 +837,23 @@ class GenerativeRestore() : Effect() {
     }
 }
 
-class GenerativeReplace(private val from: String, private val to: String, private val preserveGeometry: Boolean?) : Effect() {
+class GenerativeReplace(private val from: String, private val to: String, private val preserveGeometry: Boolean?, private val multiple: Boolean?) : Effect() {
     override fun toString(): String {
         return "e_gen_replace".joinWithValues(
             "from_$from",
             "to_$to",
+            multiple?.let { "multiple_$multiple" },
             preserveGeometry?.let { "preserve-geometry_$preserveGeometry" }, separator = ";")
     }
 
         class Builder(private val from: String, private val to: String): TransformationComponentBuilder {
             private var preserveGeometry: Boolean? = null
+            private var multiple: Boolean? = null
 
             fun preserve_geometry(preserve_geometry: Boolean) = apply { this.preserveGeometry = preserve_geometry }
+            fun multiple(multiple: Boolean) = apply { this.multiple = multiple}
 
-            override fun build() = GenerativeReplace(from, to, preserveGeometry)
+            override fun build() = GenerativeReplace(from, to, preserveGeometry, multiple)
         }
 }
 

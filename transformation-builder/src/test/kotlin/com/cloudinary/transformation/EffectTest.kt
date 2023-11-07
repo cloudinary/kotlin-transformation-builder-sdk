@@ -460,6 +460,9 @@ class EffectTest {
         cldAssert("e_gen_replace:from_baloon;to_airplane;preserve-geometry_true", Effect.generativeReplace("baloon", "airplane") {
             preserve_geometry(true)
         })
+        cldAssert("e_gen_replace:from_baloon;to_airplane;multiple_true", Effect.generativeReplace("baloon", "airplane"){
+            multiple(true)
+        })
     }
 
     @Test
