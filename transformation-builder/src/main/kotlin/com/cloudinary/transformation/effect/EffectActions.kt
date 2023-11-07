@@ -874,7 +874,7 @@ class GenerativeRecolor(private val prompt: Any, private val toColor: Color, pri
     }
 }
 
-class GenerativeRemove(private val prompt: Any?, private val region: Any?, private val multiple: Boolean?) : Effect() {
+class GenerativeRemove(private val prompt: Any?, private val region: Any?, private val multiple: Boolean?, private val removeShadow: Boolean?) : Effect() {
     override fun toString(): String {
         return "e_gen_remove".joinWithValues(prompt?.let {"prompt_(${ if(prompt is Array<*> && prompt.isArrayOf<String>()) {
             prompt.toList().joinToString(";")} else {
@@ -883,19 +883,22 @@ class GenerativeRemove(private val prompt: Any?, private val region: Any?, priva
         })"}, region?.let { "region_(${ if(region is Array<*> && region.isArrayOf<String>()) {
             region.toList().joinToString(";")} else {
             "$region"
-        }})"}, multiple?.let { "multiple_$multiple"}, separator = ";")
+        }})"}, multiple?.let { "multiple_$multiple"},
+            removeShadow?.let { "remove-shadow_$removeShadow" }, separator = ";")
     }
 
     class Builder: TransformationComponentBuilder {
         private var prompt: Any? = null
         private var region: Any? = null
         private var multiple: Boolean? = null
+        private var removeShadow: Boolean? = null
 
         fun multiple(multiple: Boolean?) = apply { this.multiple = multiple }
         fun prompt(prompt: Any) = apply { this.prompt = prompt }
         fun region(region: Any) = apply { this.region = region }
+        fun removeShadow(removeShadow: Boolean) = apply { this.removeShadow = removeShadow }
 
-        override fun build() = GenerativeRemove(prompt, region, multiple)
+        override fun build() = GenerativeRemove(prompt, region, multiple, removeShadow)
     }
 }
 

@@ -497,5 +497,9 @@ class EffectTest {
             region(Rectangle(x = 10, y = 10, width = 10, height = 10))
             multiple(false)
         })
+        cldAssert("e_gen_remove:prompt_(dog);remove-shadow_true", Effect.generativeRemove{
+            prompt("dog")
+            removeShadow(true)
+        })
     }
 }
