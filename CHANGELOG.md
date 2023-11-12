@@ -1,3 +1,12 @@
+1.4.1 / 2023-11-12
+==================
+
+Other changes
+-------------
+* Update generative remove parameters
+* Update generative replace parameters
+
+
 1.4.0 / 2023-10-31
 ==================
 
