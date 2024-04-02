@@ -122,7 +122,7 @@ abstract class Effect : Action {
             return builder.build()
         }
 
-        fun blueRegion(options: (BlurRegion.Builder.() -> Unit)? = null): BlurRegion {
+        fun blurRegion(options: (BlurRegion.Builder.() -> Unit)? = null): BlurRegion {
             val builder = BlurRegion.Builder()
             options?.let { builder.it() }
             return builder.build()
