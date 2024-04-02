@@ -502,4 +502,9 @@ class EffectTest {
             removeShadow(true)
         })
     }
+
+    @Test
+    fun testUpscale() {
+        cldAssert("e_upscale", Effect.upscale())
+    }
 }

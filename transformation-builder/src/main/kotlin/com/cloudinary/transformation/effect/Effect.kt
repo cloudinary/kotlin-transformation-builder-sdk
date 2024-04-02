@@ -115,6 +115,12 @@ abstract class Effect : Action {
             options?.let { builder.it() }
             return builder.build()
         }
+
+        fun upscale(options: (Upscale.Builder.() -> Unit)? = null): Upscale {
+            val builder = Upscale.Builder()
+            options?.let { builder.it() }
+            return builder.build()
+        }
     }
 }
 

@@ -827,13 +827,23 @@ class BackgroundRemoval(private val fineEdges: Boolean?, private val hints: List
     }
 }
 
+class Upscale() : Effect() {
+    override fun toString(): String {
+        return "e_upscale"
+    }
+
+    class Builder: TransformationComponentBuilder {
+        override fun build() = Upscale()
+    }
+}
+
 class GenerativeRestore() : Effect() {
     override fun toString(): String {
         return "e_gen_restore"
     }
 
     class Builder: TransformationComponentBuilder {
-        override fun build() = GenerativeRestore();
+        override fun build() = GenerativeRestore()
     }
 }
 
@@ -873,6 +883,7 @@ class GenerativeRecolor(private val prompt: Any, private val toColor: Color, pri
         override fun build() = GenerativeRecolor(prompt, toColor, multiple)
     }
 }
+
 
 class GenerativeRemove(private val prompt: Any?, private val region: Any?, private val multiple: Boolean?, private val removeShadow: Boolean?) : Effect() {
     override fun toString(): String {
