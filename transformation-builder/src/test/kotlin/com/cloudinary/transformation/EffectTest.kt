@@ -502,4 +502,40 @@ class EffectTest {
             removeShadow(true)
         })
     }
+
+    @Test
+    fun testBlurFaces() {
+        cldAssert("e_blur_faces", Effect.blurFaces())
+        cldAssert("e_blur_faces:200", Effect.blurFaces {
+            strength(200)
+        })
+    }
+
+    @Test
+    fun testBlurRegion() {
+        cldAssert("e_blur_region", Effect.blueRegion())
+        cldAssert("e_blur_region:600", Effect.blueRegion {
+            strength(600)
+        })
+        cldAssert("e_blur_region:400,w_300,h_400,x_200,y_50", Effect.blueRegion {
+            strength(400)
+            width(300)
+            height(400)
+            x(200)
+            y(50)
+        })
+        cldAssert("e_blur_region,w_0.5,h_0.25,x_0.3,y_0.3", Effect.blueRegion {
+            width(0.5)
+            height(0.25)
+            x(0.3)
+            y(0.3)
+        })
+        cldAssert("e_blur_region:\$var1,w_\$var2,h_\$var3,x_\$var4,y_\$var5", Effect.blueRegion {
+            strength("\$var1")
+            width("\$var2")
+            height("\$var3")
+            x("\$var4")
+            y("\$var5")
+        })
+    }
 }
