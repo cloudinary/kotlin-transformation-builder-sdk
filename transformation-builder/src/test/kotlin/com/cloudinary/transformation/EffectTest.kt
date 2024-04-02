@@ -502,4 +502,9 @@ class EffectTest {
             removeShadow(true)
         })
     }
+
+    @Test
+    fun testEnhance() {
+        cldAssert("e_enhance", Effect.enhance());
+    }
 }

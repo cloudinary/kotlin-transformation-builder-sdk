@@ -115,6 +115,11 @@ abstract class Effect : Action {
             options?.let { builder.it() }
             return builder.build()
         }
+
+        fun enhance(): Enhance {
+            val builder = Enhance.Builder()
+            return builder.build();
+        }
     }
 }
 
