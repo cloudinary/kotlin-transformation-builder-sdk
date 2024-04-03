@@ -3,6 +3,7 @@ package com.cloudinary.transformation.resize
 import com.cloudinary.transformation.Param
 import com.cloudinary.transformation.background.Background
 import com.cloudinary.transformation.expression.Expression
+import com.cloudinary.transformation.gravity.AutoGravity
 import com.cloudinary.transformation.gravity.CompassGravity
 import com.cloudinary.transformation.gravity.Gravity
 
@@ -83,6 +84,26 @@ class Pad(
             gravity,
             offsetX,
             offsetY,
+            background
+        )
+    }
+}
+
+class AutoPad(
+    dimensions: Dimensions,
+    gravity: AutoGravity? = null,
+    background: Background? = null
+): BasePad(dimensions, null, null, gravity, null, null, background) {
+    override val actionType = "auto_pad"
+
+    class Builder : BasePadBuilder() {
+        private var gravity: AutoGravity? = null
+
+        fun gravity(gravity: AutoGravity) = apply { this.gravity = gravity }
+
+        override fun build() = AutoPad(
+            Dimensions(width, height, aspectRatio),
+            gravity,
             background
         )
     }

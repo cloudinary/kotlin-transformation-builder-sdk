@@ -166,11 +166,13 @@ class ResizeTest {
         cldAssert("c_fill,g_xy_center,x_100,y_100", Resize.fill {
             gravity(Gravity.xyCenter())
             offsetX(100)
-            offsetY(100)})
+            offsetY(100)
+        })
         cldAssert("c_fill,g_xy_center,x_100,y_100", Resize.fill {
             gravity(Gravity.xyCenter())
             x(100)
-            y(100)})
+            y(100)
+        })
         cldAssert("c_fill,w_100", Resize.fill { width(100) })
         cldAssert("c_fill,w_1.0", Resize.fill { width(1f) })
         cldAssert("c_fill,h_100,w_100", Resize.fill {
@@ -605,5 +607,19 @@ class ResizeTest {
                 y(5.5f)
             }
         )
+    }
+
+    @Test
+    fun testAutoPad() {
+        cldAssert("c_auto_pad", Resize.autoPad())
+        cldAssert("c_auto_pad,h_10,w_10", Resize.autoPad(10,10))
+        cldAssert("ar_1,c_auto_pad,h_10,w_10", Resize.autoPad {
+            width(10)
+            height(10)
+            aspectRatio(1)
+        })
+        cldAssert("c_auto_pad,g_auto", Resize.autoPad {
+            gravity(Gravity.autoGravity())
+        })
     }
 }
