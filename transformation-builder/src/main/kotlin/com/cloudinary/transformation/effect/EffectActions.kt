@@ -827,6 +827,16 @@ class BackgroundRemoval(private val fineEdges: Boolean?, private val hints: List
     }
 }
 
+class Upscale() : Effect() {
+    override fun toString(): String {
+        return "e_upscale"
+    }
+
+    class Builder: TransformationComponentBuilder {
+        override fun build() = Upscale()
+    }
+}
+
 class Enhance() : Effect() {
     override fun toString(): String {
         return "e_enhance";
@@ -843,7 +853,7 @@ class GenerativeRestore() : Effect() {
     }
 
     class Builder: TransformationComponentBuilder {
-        override fun build() = GenerativeRestore();
+        override fun build() = GenerativeRestore()
     }
 }
 
@@ -909,6 +919,47 @@ class GenerativeRemove(private val prompt: Any?, private val region: Any?, priva
         fun removeShadow(removeShadow: Boolean) = apply { this.removeShadow = removeShadow }
 
         override fun build() = GenerativeRemove(prompt, region, multiple, removeShadow)
+    }
+}
+
+class BlurRegion(private val strength: Any?, private val width: Any?, private val height: Any?, private val x: Any?, private val y: Any?): Effect() {
+    override fun toString(): String {
+        return "e_blur_region".joinWithValues(
+            strength?.let { "$strength" }).joinWithValues(
+            width?.let { "w_$width" },
+            height?.let { "h_$height" },
+            x?.let { "x_$x" },
+            y?.let { "y_$y" }, separator = ",", actionSeparator = ","
+        )
+    }
+
+    class Builder: TransformationComponentBuilder {
+        private var strength: Any? = null
+        private var width: Any? = null
+        private var height: Any? = null
+        private var x: Any? = null
+        private var y: Any? = null
+
+        fun strength(strength: Any?) = apply { this.strength = strength }
+        fun width(width: Any?) = apply { this.width = width }
+        fun height(height: Any?) = apply { this.height = height }
+        fun x(x: Any?) = apply { this.x = x }
+        fun y(y: Any?) = apply { this.y = y }
+
+        override fun build() = BlurRegion(strength, width, height, x, y)
+    }
+}
+class BlurFaces(private val strength: Any?): Effect() {
+    override fun toString(): String {
+        return "e_blur_faces".joinWithValues(strength?.let {"$strength"})
+    }
+
+    class Builder: TransformationComponentBuilder {
+        private var strength: Any? = null
+
+        fun strength(strength: Any?) = apply { this.strength = strength }
+
+        override fun build() = BlurFaces(strength);
     }
 }
 
