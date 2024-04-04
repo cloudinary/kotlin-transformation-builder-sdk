@@ -116,6 +116,18 @@ abstract class Effect : Action {
             return builder.build()
         }
 
+        fun blurFaces(options: (BlurFaces.Builder.() -> Unit)? = null): BlurFaces {
+            val builder = BlurFaces.Builder()
+            options?.let { builder.it() }
+            return builder.build()
+        }
+
+        fun blurRegion(options: (BlurRegion.Builder.() -> Unit)? = null): BlurRegion {
+            val builder = BlurRegion.Builder()
+            options?.let { builder.it() }
+            return builder.build()
+        }
+
         fun upscale(options: (Upscale.Builder.() -> Unit)? = null): Upscale {
             val builder = Upscale.Builder()
             options?.let { builder.it() }
