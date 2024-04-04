@@ -837,6 +837,16 @@ class Upscale() : Effect() {
     }
 }
 
+class Enhance() : Effect() {
+    override fun toString(): String {
+        return "e_enhance";
+    }
+
+    class Builder: TransformationComponentBuilder {
+        override fun build() = Enhance();
+    }
+}
+
 class GenerativeRestore() : Effect() {
     override fun toString(): String {
         return "e_gen_restore"
@@ -883,7 +893,6 @@ class GenerativeRecolor(private val prompt: Any, private val toColor: Color, pri
         override fun build() = GenerativeRecolor(prompt, toColor, multiple)
     }
 }
-
 
 class GenerativeRemove(private val prompt: Any?, private val region: Any?, private val multiple: Boolean?, private val removeShadow: Boolean?) : Effect() {
     override fun toString(): String {
