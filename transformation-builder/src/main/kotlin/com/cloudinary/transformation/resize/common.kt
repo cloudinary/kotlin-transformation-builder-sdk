@@ -52,6 +52,14 @@ abstract class Resize(
             return builder.build()
         }
 
+        fun auto(width: Int? = null, height: Int? = null, options: (CropAuto.Builder.() -> Unit)? = null): Resize {
+            val builder = CropAuto.Builder()
+            width?.let { builder.width(width) }
+            height?.let { builder.height(height) }
+            options?.let { builder.it() }
+            return builder.build()
+        }
+
         fun fit(width: Int? = null, height: Int? = null, options: (Fit.Builder.() -> Unit)? = null): Resize {
             val builder = Fit.Builder()
             width?.let { builder.width(width) }
@@ -185,6 +193,8 @@ abstract class Resize(
             options?.let { builder.it() }
             return builder.build()
         }
+
+
     }
 }
 
