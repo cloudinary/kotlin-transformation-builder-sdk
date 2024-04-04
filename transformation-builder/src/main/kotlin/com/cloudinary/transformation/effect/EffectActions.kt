@@ -827,13 +827,33 @@ class BackgroundRemoval(private val fineEdges: Boolean?, private val hints: List
     }
 }
 
+class Upscale() : Effect() {
+    override fun toString(): String {
+        return "e_upscale"
+    }
+
+    class Builder: TransformationComponentBuilder {
+        override fun build() = Upscale()
+    }
+}
+
+class Enhance() : Effect() {
+    override fun toString(): String {
+        return "e_enhance";
+    }
+
+    class Builder: TransformationComponentBuilder {
+        override fun build() = Enhance();
+    }
+}
+
 class GenerativeRestore() : Effect() {
     override fun toString(): String {
         return "e_gen_restore"
     }
 
     class Builder: TransformationComponentBuilder {
-        override fun build() = GenerativeRestore();
+        override fun build() = GenerativeRestore()
     }
 }
 

@@ -610,6 +610,24 @@ class ResizeTest {
     }
 
     @Test
+    fun testCropAuto() {
+        cldAssert("c_auto", Resize.auto())
+        cldAssert("c_auto,h_100,w_100", Resize.auto(100,100))
+        cldAssert("c_auto,g_auto", Resize.auto {
+            gravity(Gravity.autoGravity())
+        })
+        cldAssert("c_auto,g_auto,h_100,w_100", Resize.auto(100,100) {
+            gravity(Gravity.autoGravity())
+        })
+        cldAssert("ar_1,c_auto,g_auto,h_100,w_100", Resize.auto {
+            width(100)
+            height(100)
+            aspectRatio(1)
+            gravity(Gravity.autoGravity())
+        })
+    }
+
+    @Test
     fun testAutoPad() {
         cldAssert("c_auto_pad", Resize.autoPad())
         cldAssert("c_auto_pad,h_10,w_10", Resize.autoPad(10,10))
