@@ -538,4 +538,14 @@ class EffectTest {
             y("\$var5")
         })
     }
+
+    @Test
+    fun testUpscale() {
+        cldAssert("e_upscale", Effect.upscale())
+    }
+
+    @Test
+    fun testEnhance() {
+        cldAssert("e_enhance", Effect.enhance());
+    }
 }
