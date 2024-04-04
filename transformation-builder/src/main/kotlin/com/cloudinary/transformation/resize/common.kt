@@ -116,6 +116,14 @@ abstract class Resize(
             return builder.build()
         }
 
+        fun autoPad(width: Int? = null, height: Int? = null, options: (AutoPad.Builder.() -> Unit)? = null): Resize {
+            val builder = AutoPad.Builder()
+            width?.let { builder.width(width) }
+            height?.let { builder.height(height) }
+            options?.let { builder.it() }
+            return builder.build()
+        }
+
         fun limitPad(
             width: Int? = null,
             height: Int? = null,
