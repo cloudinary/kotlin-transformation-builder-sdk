@@ -504,6 +504,12 @@ class EffectTest {
     }
 
     @Test
+    fun testGenerativeBackgroundReplace() {
+        cldAssert("e_gen_background_replace", Effect.generativeBackgroundReplace())
+        cldAssert("e_gen_background_replace:prompt_dog", Effect.generativeBackgroundReplace { prompt("dog") })
+    }
+
+    @Test
     fun testBlurFaces() {
         cldAssert("e_blur_faces", Effect.blurFaces())
         cldAssert("e_blur_faces:200", Effect.blurFaces {

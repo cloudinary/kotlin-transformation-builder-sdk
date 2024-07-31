@@ -922,6 +922,20 @@ class GenerativeRemove(private val prompt: Any?, private val region: Any?, priva
     }
 }
 
+class GenerativeBackgroundReplace(private val prompt: String?) : Effect() {
+    override fun toString(): String {
+        return "e_gen_background_replace".joinWithValues(prompt?.let {"prompt_$prompt"})
+    }
+
+    class Builder: TransformationComponentBuilder {
+        private var prompt: String? = null
+
+        fun prompt(prompt: String) = apply { this.prompt = prompt }
+
+        override fun build() = GenerativeBackgroundReplace(prompt)
+    }
+}
+
 class BlurRegion(private val strength: Any?, private val width: Any?, private val height: Any?, private val x: Any?, private val y: Any?): Effect() {
     override fun toString(): String {
         return "e_blur_region".joinWithValues(
