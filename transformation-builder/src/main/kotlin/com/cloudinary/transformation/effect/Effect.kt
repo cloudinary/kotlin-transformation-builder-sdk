@@ -116,6 +116,12 @@ abstract class Effect : Action {
             return builder.build()
         }
 
+        fun generativeBackgroundReplace(options: (GenerativeBackgroundReplace.Builder.() -> Unit)? = null): GenerativeBackgroundReplace {
+            val builder = GenerativeBackgroundReplace.Builder()
+            options?.let { builder.it() }
+            return builder.build()
+        }
+
         fun blurFaces(options: (BlurFaces.Builder.() -> Unit)? = null): BlurFaces {
             val builder = BlurFaces.Builder()
             options?.let { builder.it() }
