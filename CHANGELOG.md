@@ -1,3 +1,13 @@
+1.5.0 / 2024-08-07
+==================
+
+* Add blur faces and blur region
+* Add upscale
+* Add enhance 
+* Add auto pad
+* Add crop auto
+* Add generative backgrond replace
+
 1.4.1 / 2023-11-12
 ==================
 
